@@ -7,8 +7,6 @@ import logger from 'redux-logger';
 import { useState } from 'react';
 
 
-// const [pitcherList, setPitcherList] = useState(['Maud Nelson', 'Ila Borders', 'Don Newcombe', 'CC Sabathia']);
-
 /** Add Reducers **/
 
 const pitcherList = (state = ['Maud Nelson', 'Ila Borders', 'Don Newcombe', 'CC Sabathia'], action) =>{
