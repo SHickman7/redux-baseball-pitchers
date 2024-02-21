@@ -1,13 +1,19 @@
 import { useState } from 'react';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 function App() {
   const [currentPitcher, setCurrentPitcher] = useState('Maud Nelson');
   const [currentCatcher, setCurrentCatcher] = useState('Elston Howard');
 
-  const [pitcherList, setPitcherList] = useState(['Maud Nelson', 'Ila Borders', 'Don Newcombe', 'CC Sabathia']);
-  const [catcherList, setCatcherList] = useState(['Roy Campanella', 'Elston Howard', 'Kenji Jojima']);
+  // const [pitcherList, setPitcherList] = useState(['Maud Nelson', 'Ila Borders', 'Don Newcombe', 'CC Sabathia']);
+  // const [catcherList, setCatcherList] = useState(['Roy Campanella', 'Elston Howard', 'Kenji Jojima']);
   const [newPitcher, setNewPitcher] = useState('');
   const [newCatcher, setNewCatcher] = useState('');
+
+const pitcherList = useSelector(store => store.pitcherList);
+const catcherList = useSelector(store => store.catcherList);
+const dispatch = useDispatch();
 
   const handlePitcherNameChange = event => {
     setNewPitcher(event.target.value);
@@ -16,9 +22,8 @@ function App() {
   // add new pitcher to the array. this will move to the pitcher reducer!
   const handlePitcherSubmit = event => {
     event.preventDefault();
-    // spread: give me everything in pitcherList, then add this new thing
-    setPitcherList([...pitcherList, newPitcher]);
     setNewPitcher('');
+    dispatch({ type: 'PITCHERLIST_ADD', payload: newPitcher})
   };
 
   const handleCatcherNameChange = event => {
@@ -28,9 +33,8 @@ function App() {
   // add new catcher to array. this will move to the catcher reducer!
   const handleCatcherSubmit = event => {
     event.preventDefault();
-    // spread: give me everything in catcherList, then add this new thing
-    setCatcherList([...catcherList, newCatcher]);
     setNewCatcher('');
+    dispatch({ type: 'CATCHERLIST_ADD', payload: newCatcher})
   };
 
   return (
